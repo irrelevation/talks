@@ -1,5 +1,11 @@
 # Web Security
 
+## Questions
+
+How to hack a website/server?
+What can I do as a developer?
+How is Information delivered over the Internet?
+
 ## A brief History of the Internet
 
 ### Early 90s
