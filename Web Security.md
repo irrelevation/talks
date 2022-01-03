@@ -211,6 +211,6 @@ CH7
 
 ## Further Reading
 
-[First Steps in Web Security (MDN)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security)
-[Web Security for Developers, by Malcolm McDonald](httpps://nostarch.com/websecurity)
-[Security for Web Developers, by John Paul Mueller](https://www.oreilly.com/library/view/security-for-web/9781491928684/)
+[First Steps in Web Security (MDN)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security)<br>
+[Web Security for Developers, by Malcolm McDonald](https://nostarch.com/websecurity)<br>
+[Security for Web Developers, by John Paul Mueller](https://www.oreilly.com/library/view/security-for-web/9781491928684/)<br>
