@@ -178,6 +178,51 @@ Adhering to a structured approach when developing software has several advantage
 
 > (The standard)[https://github.com/OWASP/ASVS] provides a basis for designing, building, and testing technical application security controls, including architectural concerns, secure development lifecycle, threat modelling, agile security including continuous integration / deployment, serverless, and configuration concerns.
 
+The standard splits the recommendations in three categories.
+
+1. L1 - The bare minimum
+2. L2 - Good enough for most apps
+3. L3 - High value, high assurance, or high safety apps
+   The following best practices cover only parts of the bare minimum.
+
+### Passwords
+
+- must be at least 12 characters
+- must be at most 128 characters
+- must allow any printable character including Emojis
+- Don't put any other limitations on password composition
+- must not be truncated
+- must be changable
+- must require the old password to be changed
+- Never force users to change their password or disallow past passwords
+- must be checked against known breached passwords
+- Provide a password strength meter
+- Make sure users can pase in passwords and use password managers
+- Make the password hidden/masked by default, but provide options to show the last character and the entire password
+
+### General Authentication Security
+
+- Implement measurements against automated breached credential testing, brute force, and lockout attacks such as:
+  - soft lockouts
+  - rate limiting
+  - CAPTCHA
+  - ever increasing delays between attempts
+  - IP address restrictions
+  - risk-based restrictions (eg. location, first login on a device, recent unlock attempts)
+  - Don't allow more than 100 failed attempts per hour per account
+- Limit the use of weak authentication like SMS and email
+- Notify the user _securely_ about updates to authentication details like
+  - credential resets
+  - email or address changes
+  - logins from unkown or risky locations
+- if you have to use unsecure channels like email or SMS for notification, make sure not to disclose sensitive information
+- System generated initial passwords and codes should
+  - be _securely_ randomly generated
+  - be at least 6 characters long
+  - expire after a short period of time
+
+### Credential Recovery
+
 ## OWASP Top 10
 
 The Open Web Application Security Project maintains [a list of the most critical security risks](https://owasp.org/www-project-top-ten/). They also provide insights in how to avoid these risks.
@@ -207,10 +252,8 @@ An attacker tricks your database driver into executing queries you did not write
 
 ### Cross-Site-Scripting
 
-CH7
-
 ## Further Reading
 
-[First Steps in Web Security (MDN)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security)<br>
-[Web Security for Developers, by Malcolm McDonald](https://nostarch.com/websecurity)<br>
-[Security for Web Developers, by John Paul Mueller](https://www.oreilly.com/library/view/security-for-web/9781491928684/)<br>
+- [First Steps in Web Security (MDN)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security)
+- [Web Security for Developers, by Malcolm McDonald](https://nostarch.com/websecurity)
+- [Security for Web Developers, by John Paul Mueller](https://www.oreilly.com/library/view/security-for-web/9781491928684/)
