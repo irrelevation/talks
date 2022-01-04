@@ -12,9 +12,9 @@
 
 ## Outline
 
-1. History and technical background
-2. General security measures
-3. How to address specific attack vectors
+1. [History and technical background](#history-and-technical-background)
+2. [General security measures](#general-#security-measures)
+3. [How to address specific attack vectors](#how-to-address-specific-attack-vectors)
 
 ## TLDR
 
@@ -29,7 +29,7 @@
 - ad 2. Why those measures?
 - ad 3. How to hack a website/server?
 
-## 1. History and technical background
+## History and technical background
 
 ### A brief History of the Internet
 
@@ -135,7 +135,7 @@ JavaScript executing in the browser sandbox _is_ permitted to do the following a
 
 TODO
 
-# 2. General security measures
+# General security measures
 
 ## The Software Developement Life Cycle (SDLC)
 
@@ -306,7 +306,7 @@ This method uses a secure secondary communication channel for authentication, us
 
 ## Configuration
 
-# 3. How to address specific attack vectors
+# How to address specific attack vectors
 
 ## OWASP Top 10
 
