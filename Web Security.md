@@ -3,6 +3,8 @@
 ## TODO
 
 - A short intro to all ## headings under 2.
+- why security by obscurity is a bad idea
+- trust in the context of security
 - trust boundaries, shift from server-side to trusted service layers
 - Single vs multi factor auth
 - the principle of least privilege
@@ -10,10 +12,12 @@
 - Fill Glossary
 - Session: cookie vs tokens
 - Tokens: tampering, enveloping, replay, null cypher, and key substitution attacks
+- ReDos attacks: Like a DDos attack but exploiting regular expressions with bad runtime complexities.
 - proof read
 
 ## Questions
 
+- Why is security important?
 - What can I do as a developer?
 - How to facilitate writing secure code?
 - Why those measures?
@@ -194,7 +198,7 @@ Adhering to a structured approach when developing software has several advantage
 
 ## OWASP - Top 10 Proactive Controls
 
-This document describes the 10 most important security aspects every developer should be familiar with and incorporate in every project.
+[This document](https://owasp.org/www-project-proactive-controls/) describes the 10 most important security aspects every developer should be familiar with and incorporate in every project.
 
 ### 1. Define Security Requirements
 
@@ -212,36 +216,60 @@ A lot of security features are readily available via libraries. Your job is to u
 
 ### 3. Secure Database Access
 
-- Secure queries
-- Secure configuration
-- Secure authentication
-- Secure communication
+- Secure queries - [Use query parameterization](https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html)
+- Secure configuration - Check your DB configuration, not all database systems have "secure by default" configs
+- Secure Authentication - Only allow authenticated access.
+- Secure Communication - Only allow communication via secure channels.
 
-#### Secure Queries
+### 4. Encode and Escape Data
 
-- [Use querie parameterization](https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html)
+These techniques address injection and Cross-Site-Scripting attacks. They prevent the input from being interpreted as code instead of data. Encoding transforms special characters into safe characters. Escaping inserts a special character to signal, that the following is to be interpreted as data and not as code.
 
-#### Secure Configuration
+- Encode and Escape all untrusted input
 
-## The Application Security Verification Standard
+### 5. Validate All Inputs
 
-> The standard provides a basis for designing, building, and testing technical application security controls, including architectural concerns, secure development lifecycle, threat modelling, agile security including continuous integration / deployment, serverless, and configuration concerns.
+This technique ensures that input is properly formated. Note that properly formated input can still be dangerous. You can use valid email addresses for SQL injection and valid URLS for Cross-Site-Scripting. Use Validation as a complementary technique.
 
-[The standard](https://github.com/OWASP/ASVS) splits the recommendations in three categories.
+- Always validate _server_-side. Client-side validation is good for UX purposes, but not for security.
+- Validate the **Syntax**. Check the expected length, format and characterset.
+  - via whitelisting - actually reduces the attack surface
+  - _not_ via blacklisting - only catches obvious attacks
+  - If you use Regular Expressions for validation be wary of ReDos attacks. There are tools to test your Regular expressions.
+- Validate the **Semantics**. Check if the input "makes sense". Start dates have to happen before end dates. Age, duration etc can't be negative.
+- Avoid **serialized data**. It is nearly impossible to validate properly. Try using formats like JSON instead.
+- If you have to work with serialized data
+  - encrypt it to prevent tampering
+  - enforce strict type constraints
+  - run it isolated in environments with low privileges
+  - log deserialization exceptions properly
+  - monitor deserialization
+- If you have to accept **HTML** input use a library to sanitize it.
 
-1. L1 - The bare minimum
-2. L2 - Good enough for most apps
-3. L3 - High value, high assurance, or high safety apps
+### 6. Implement Digital Identity
 
-The following best practices cover mostly parts of the bare minimum requirements.
+What kind of authentication should I use? Password? OAuth? How should I manage sessions? Cookies? Tokens? To answer these questions get help from established sources like the [Digital Identity Guidelines](https://pages.nist.gov/800-63-3/sp800-63b.html) issued by the National Institute for Standards and Technology or the [The Application Security Verification Standard](#the-application-security-verification-standard) issued by OWASP. The most important part is to figure out the what level of security is appropriate for your application. The mentioned guideline suggests three categories your app can fall into.
 
-## Authentication
+1. Level 1 - The bare minimum.
+2. Level 2 - Good enough for most apps
+3. Level 3 - High risk applications
 
-### Passwords
+#### Authentication
 
-- must be at least 12 characters
-- must be at most 128 characters
-- must allow any printable character including Emojis
+Making sure that you are who you claim to be. Choose an authentication method according to your use case.
+
+##### Level 1 - Low risk applications
+
+Applications that don't contain private data.
+
+- Use **single-factor** authentication
+- Your authetication of choice is usually a **passord**
+
+###### Passwords
+
+- should be at least 12 characters
+- should be at most 128 characters
+- should allow any printable character including Emojis
 - Don't put any other limitations on password composition
 - must not be truncated
 - must be changable
@@ -252,113 +280,101 @@ The following best practices cover mostly parts of the bare minimum requirements
 - Make sure users can pase in passwords and use password managers
 - Make the password hidden/masked by default, but provide options to show the last character and the entire password
 
-### General Authentication Security
+###### Password Recovery
 
-- Implement measurements against automated breached credential testing, brute force, and lockout attacks such as:
-  - soft lockouts
-  - rate limiting
-  - CAPTCHA
-  - ever increasing delays between attempts
-  - IP address restrictions
-  - risk-based restrictions (eg. location, first login on a device, recent unlock attempts)
-  - Don't allow more than 100 failed attempts per hour per account
-- Limit the use of weak authentication like SMS and email
-- Notify the user _securely_ about updates to authentication details like
-  - credential resets
-  - email or address changes
-  - logins from unkown or risky locations
-- if you have to use unsecure channels like email or SMS for notification, make sure not to disclose sensitive information
-- System generated initial passwords and codes should
-  - be _securely_ randomly generated
-  - be at least 6 characters long
-  - expire after a short period of time
-
-### Credential Recovery
+You need to provide a secure way for people to recover their password. This step usually relies on 2-Factor-Authetication.
 
 - Don't send activation or recovery secrets in clear text
 - Don't use password hints or secret questions
 - Use secure recovery mechanisms like soft tokens or push notifications
 
-### Out of Band Verification
+###### Password Storage
 
-This method uses a secure secondary communication channel for authentication, usually a physical device like your mobile phone. Ever had to type in that 6 digit code you received on your phone? That was out of band verification.
+Store passwords securely. Passwords should be hashed, salted and peppered.
 
-- Don't offer clear text out of band verification (eg SMS) by default. Use push notifications instead
-- Tokens, codes, and authentication request should expire after 10 minutes
-- Tokens, codes, and authentication request should only be usable once.
+##### Level 2 - Higher risk applications
 
-## Session Management
+Applications that contain personal information.
 
-- Sessions must be unique
+- Use Multi-Factor Authentication. Combine 2 or more of the following authentication methods:
+  1. Something you know - Password or PIN
+  2. Something you own - token or phone
+  3. Something you are - biometrics, like finger prints or face scans.
+- Never use biometric data only, it is easy to steal.
+- Combine biometrics with 2.
+
+##### Level 3 - High value, high assurance, or high safety apps
+
+Applications that when breached could cause personal harm, significant financial loss, harm to the public interest, or civil or criminal violations.
+
+- Use cryptographic based authentication
+
+#### Session Management
+
+Sessions allow a user to stay "logged in" for a certain amount of time. There are two major versions to choose from: Cookie based sessions and token basen sessions.
+
+- Sessions IDs must be long, unique, and random
 - It must not be possible to guess a session
 - It must not be possible to share a session
-- Sessions must be invalidated when no longer required and timed out if inactive.
+- Sessions must be invalidated when no longer required.
+- Sessions must have a maximum lifetime and be timed out if inactive. The more valuable the data, the shorter the lifetime / time til timeout.
 
-### General Session Management Security
+##### Cookie based Session Management
 
-- Never reveal session tokens in URL parameters
+Cookie based sessions are called "stateful". The server manages the session data. It puts all the relevant information in a cookie and sends it to the client. The client then resends this cookie with every consecutive request, allowing the server to identify the client.
 
-### Session Binding
-
-- Generate a new session token when a user authenticates
-- Session tokens should have at least 64 bits of entropy
-- Store session tokens _securely_ in the browser via secured cookies or session storage
-
-### Session Termination
-
-- Ensure that logout and expiration invalidate session tokens. The user should not be able to continue the session by hitting the "back" button.
-- If you permit users to stay logged in, let them re-authenticate after 30 days
-
-### Cookie based Session Management
-
-- set the "Secure" attribute on session tokens
-- set the "HttpOnly" attribute
-- set the "SameSite" attribute to limit CSRF attacks
+- Set the "Secure" attribute to ensure that a secure transport mechanism (TLS) is used
+- Set the "HttpOnly" attribute to prevent the cooke being accessed via JavaScript
+- Set the "SameSite" attribute to limit CSRF attacks
 - Use the "\_\_Host-" prefix to ensure the cookie is sent only to the host who set it initially.
-- If you several apps under the same domain, make sure to set the "path" attribute as specifically as possible.
+- If you host several apps under the same domain, make sure to set the "path" attribute as restrictive as possible.
 
-### Token-based Session Management
+##### Token-based Session Management
+
+Token based sessions are called "stateless". The client manages the session data. The app generates a short-lived access token. The client only resends this token with consecutive requests.
 
 - Avoid static API secrets and keys, use session tokens like JWT instead
 - Allow users to revoke OAuth tokens
 - Stateless session tokens should use digital signatures and encryption to protect against tampering, enveloping, replay, null cypher, and key substitution attacks
+- Never reveal session tokens in URL parameters
 
-### Defense against Session Management Exploits
+###### JWT - JSON Web Tokens
 
-- Ensure a full, valid login session or re-authentication, or secondary verification before sensitive transactions or account modifications.
+JSON Web Tokens is an open standard for session management via JSON Objects. One of the key aspects is, that the server never stores the token. It can verify the token via a signature.
 
-## Access Control / Authorization
+### 7. Enforce Access Controls / Authorization
 
-- Allow access to resources only to those who are authorized.
-- Make sure users have the correct roles and access priviledges
-- Protect role and permission metada
+Making sure you are allowed to do what you are trying to do. This is achieved through granting and revoking privileges and checking privileges on resource access.
 
-### General Access Control Design
-
+- Design access control up front. It is hard to retrofit.
+- Force access control on all requests.
 - Enforce access control rules on a trusted service layer, otherwise it can be bypassed.
+- Make sure users have the correct roles and access priviledges.
+- Protect role and permission metada.
+- Deny by default. When you create a new feature, make sure access is restricted until it is properly configured.
+- Adhere to the **principle of least privilege**. Don't grant more privileges than necessary. Revoke privileges when they are obsolete.
 - All information used for access control must require authorization to change it.
-- Adhere to the [**principle of least privilege**](#principle-of-least-privilege)
-- Fail _securely_ when access is unauthorized or an exception occurs
+- Log all access control events.
+- Monitor access control failures.
 
-## Validation, Sanitization and Encoding
+### 8. Protect Data Everywhere
 
-## Stored Cryptography
+Categorize the data you are working with. While public data can be handled in an unsecure fashion, handle private data with care.
 
-## Error Handling and Logging
+- Avoid storing sensitive information if possible.
+- If you have to store sensitive data, make sure it is encrypted properly.
+- If you transmit sensitive data, make sure the transmission is encrypted.
+- Don't implement your own encryption! Use trusted open resources instead.
 
-## Data Protection
+### 9. Implement Security Logging and Monitoring
 
-## Communication
+### 10. Handle all Errors and Exceptions
 
-## Malicious Code
+## The Application Security Verification Standard
 
-## Business Logic
+> The standard provides a basis for designing, building, and testing technical application security controls, including architectural concerns, secure development lifecycle, threat modelling, agile security including continuous integration / deployment, serverless, and configuration concerns.
 
-## Files and Resources
-
-## API and Web Service
-
-## Configuration
+[The standard](https://github.com/OWASP/ASVS) splits the recommendations in three categories.
 
 # How to address specific attack vectors
 
@@ -383,7 +399,7 @@ The Open Web Application Security Project maintains [a list of the most critical
 
 ### Injection
 
-An attacker injects external code in order to execute it. One of the most common types of attacks.
+An attacker injects external code in order to execute it. It is one of the most common types of attacks. It is usually achieved by tricking your program into interpreting an input as code instead of data.
 
 #### (No)SQL Injection
 
