@@ -10,18 +10,6 @@
 - Tokens: tampering, enveloping, replay, null cypher, and key substitution attacks
 - proof read
 
-## Outline
-
-1. [History and technical background](#history-and-technical-background)
-2. [General security measures](#general-#security-measures)
-3. [How to address specific attack vectors](#how-to-address-specific-attack-vectors)
-
-## TLDR
-
-1. It's impossible to prevent vulnerabilities. The best approach to security is to empower yourself and your team to detect vulnerabilities early and fix them quickly.
-2. NEVER trust user input!
-3. Use libraries (correctly)
-
 ## Questions
 
 - What can I do as a developer?
@@ -29,20 +17,36 @@
 - ad 2. Why those measures?
 - ad 3. How to hack a website/server?
 
+## Outline
+
+1. [TLDR](#tldr)
+2. [History and technical background](#history-and-technical-background)
+3. [General security measures](#general-#security-measures)
+4. [How to address specific attack vectors](#how-to-address-specific-attack-vectors)
+
+## TLDR
+
+1. It's impossible to prevent vulnerabilities. The best approach to security is to empower yourself and your team to detect vulnerabilities early and fix them quickly.
+2. NEVER trust user input!
+3. Use libraries (correctly)
+
 ## History and technical background
 
 ### A brief History of the Internet
 
 #### Early 90s
 
-- Tim Berners Lee developes HTTP & HTML @ CERN
-- text based data transfer, no encryption, first web sites
-- evolution, images Mosaic -> Netscape Navigator
+In the beginning the internet was a rather peacefull place. Servers were only sderving static assets, keeping the attack surface small. Maybe even more importantly, there were just not that many sites and servers to attack to begin with.
+
+- Tim Berners Lee developes HTTP and HTML at CERN as a method of text based data transfer. The early versions don't account for encryption or other security related features. First personal websites are created.
+- The internet gets a little more colorful with Mosaic and later Netscape Navigator allowing providing functionality for including images in websites.
 
 #### Mid 90s
 
-- templating: Rasmus Lerdorf creates PHP (Personal Home Page), dynamic generation of HTML
-- interactivity: Brendan Eich creates Mocha->LiveScript->JavaScript
+The internet gets a little more dangerous with its rise in popularity and the advent of dynamic assets.
+
+- Rasmus Lerdorf creates PHP (Personal Home Page), a language that allows developers to easyly generate html dynamically.
+- Brendan Eich creates JavaScript laying the foundation for the internet as we know it.
 
 ## How the Internet works today
 
