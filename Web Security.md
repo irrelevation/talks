@@ -200,9 +200,9 @@ This document describes the 10 most important security aspects every developer s
 
 Different apps require different levels of security. Before you start writing code analyze your security requirements
 
-- Don't reinvent the wheel. Use a standard catalog like [The OWASP Application Security Verification Standard](<#the-owasp-application-security-verification-standard-(asvs)>)
+- Don't reinvent the wheel. Use a standard catalog like [The OWASP Application Security Verification Standard](#the-application-security-verification-standard)
 
-## The OWASP Application Security Verification Standard (ASVS)
+## The Application Security Verification Standard
 
 > The standard provides a basis for designing, building, and testing technical application security controls, including architectural concerns, secure development lifecycle, threat modelling, agile security including continuous integration / deployment, serverless, and configuration concerns.
 
