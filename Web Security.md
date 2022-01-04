@@ -2,15 +2,11 @@
 
 ## TODO
 
-- A short intro to all ## headings under 2.
 - why security by obscurity is a bad idea
 - trust in the context of security
 - trust boundaries, shift from server-side to trusted service layers
-- Single vs multi factor auth
-- the principle of least privilege
 - Add Tips from The Pragmatic Programmer Chapter 43
 - Fill Glossary
-- Session: cookie vs tokens
 - Tokens: tampering, enveloping, replay, null cypher, and key substitution attacks
 - ReDos attacks: Like a DDos attack but exploiting regular expressions with bad runtime complexities.
 - proof read
