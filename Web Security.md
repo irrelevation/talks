@@ -20,6 +20,7 @@
 
 1. It's impossible to prevent vulnerabilities. The best approach to security is to empower yourself and your team to detect vulnerabilities early and fix them quickly.
 2. NEVER trust user input!
+3. Use libraries (correctly)
 
 ## Questions
 
@@ -28,17 +29,17 @@
 - ad 2. Why those measures?
 - ad 3. How to hack a website/server?
 
-# 1. History and technical background
+## 1. History and technical background
 
-## A brief History of the Internet
+### A brief History of the Internet
 
-### Early 90s
+#### Early 90s
 
 - Tim Berners Lee developes HTTP & HTML @ CERN
 - text based data transfer, no encryption, first web sites
 - evolution, images Mosaic -> Netscape Navigator
 
-### Mid 90s
+#### Mid 90s
 
 - templating: Rasmus Lerdorf creates PHP (Personal Home Page), dynamic generation of HTML
 - interactivity: Brendan Eich creates Mocha->LiveScript->JavaScript
