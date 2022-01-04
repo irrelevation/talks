@@ -3,8 +3,10 @@
 ## TODO
 
 - A short intro to all ## headings under 2.
+- trust boundaries, shift from server-side to trusted service layers
 - Single vs multi factor auth
-- Add Tips from PragProg
+- the principle of least privilege
+- Add Tips from The Pragmatic Programmer Chapter 43
 - Fill Glossary
 - Session: cookie vs tokens
 - Tokens: tampering, enveloping, replay, null cypher, and key substitution attacks
@@ -14,12 +16,13 @@
 
 - What can I do as a developer?
 - How to facilitate writing secure code?
-- ad 2. Why those measures?
-- ad 3. How to hack a website/server?
+- Why those measures?
+- How many and wich of those security measures do I need for my use case?
+- How to hack a website/server?
 
-## Outline
+## Table of Contents
 
-1. [TLDR](#tldr)
+1. [Table of Contents & TLDR](#web-security)
 2. [History and technical background](#history-and-technical-background)
 3. [General security measures](#general-#security-measures)
 4. [How to address specific attack vectors](#how-to-address-specific-attack-vectors)
@@ -189,17 +192,19 @@ Adhering to a structured approach when developing software has several advantage
 - Monitor vulnerabilities in your _dependencies_. Most of the code you release was not written by you. Make sure to monitor your dependencies and deploy patches quickly.
 - Aggregate errors to detect attacks faster.
 
+## OWASP - Top 10 Proactive Controls
+
 ## The Application Security Verification Standard (ASVS)
 
-> (The standard)[https://github.com/OWASP/ASVS] provides a basis for designing, building, and testing technical application security controls, including architectural concerns, secure development lifecycle, threat modelling, agile security including continuous integration / deployment, serverless, and configuration concerns.
+> The standard provides a basis for designing, building, and testing technical application security controls, including architectural concerns, secure development lifecycle, threat modelling, agile security including continuous integration / deployment, serverless, and configuration concerns.
 
-The standard splits the recommendations in three categories.
+[The standard](https://github.com/OWASP/ASVS) splits the recommendations in three categories.
 
 1. L1 - The bare minimum
 2. L2 - Good enough for most apps
 3. L3 - High value, high assurance, or high safety apps
 
-The following best practices cover only parts of the bare minimum.
+The following best practices cover mostly parts of the bare minimum requirements.
 
 ## Authentication
 
@@ -283,13 +288,28 @@ This method uses a secure secondary communication channel for authentication, us
 - Use the "\_\_Host-" prefix to ensure the cookie is sent only to the host who set it initially.
 - If you several apps under the same domain, make sure to set the "path" attribute as specifically as possible.
 
-### Token-based Session Management (JWT, OAuth)
+### Token-based Session Management
 
 - Avoid static API secrets and keys, use session tokens like JWT instead
 - Allow users to revoke OAuth tokens
 - Stateless session tokens should use digital signatures and encryption to protect against tampering, enveloping, replay, null cypher, and key substitution attacks
 
-## Access Control
+### Defense against Session Management Exploits
+
+- Ensure a full, valid login session or re-authentication, or secondary verification before sensitive transactions or account modifications.
+
+## Access Control / Authorization
+
+- Allow access to resources only to those who are authorized.
+- Make sure users have the correct roles and access priviledges
+- Protect role and permission metada
+
+### General Access Control Design
+
+- Enforce access control rules on a trusted service layer, otherwise it can be bypassed.
+- All information used for access control must require authorization to change it.
+- Adhere to the [**principle of least privilege**](#principle-of-least-privilege)
+- Fail _securely_ when access is unauthorized or an exception occurs
 
 ## Validation, Sanitization and Encoding
 
@@ -313,7 +333,7 @@ This method uses a secure secondary communication channel for authentication, us
 
 # How to address specific attack vectors
 
-## OWASP Top 10
+## OWASP Top 10 Web Application Security Risks
 
 The Open Web Application Security Project maintains [a list of the most critical security risks](https://owasp.org/www-project-top-ten/). They also provide insights in how to avoid these risks.
 
@@ -344,6 +364,17 @@ An attacker tricks your database driver into executing queries you did not write
 
 # Further Reading
 
+## Articles
+
 - [First Steps in Web Security (MDN)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security)
+
+## Online Resources
+
+- [The OWASP Top 10 Proactive Controls](https://owasp.org/www-project-proactive-controls/)
+- [The Application Security Verification Standard](https://github.com/OWASP/ASVS)
+- [The OWASP Top 10 Web Application Security Risks](https://owasp.org/Top10/)
+
+## Books
+
 - [Web Security for Developers, by Malcolm McDonald](https://nostarch.com/websecurity)
 - [Security for Web Developers, by John Paul Mueller](https://www.oreilly.com/library/view/security-for-web/9781491928684/)
