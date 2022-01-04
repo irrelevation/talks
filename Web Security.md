@@ -194,7 +194,15 @@ Adhering to a structured approach when developing software has several advantage
 
 ## OWASP - Top 10 Proactive Controls
 
-## The Application Security Verification Standard (ASVS)
+This document describes the 10 most important security aspects every developer should be familiar with and incorporate in every project.
+
+### Define Security Requirements
+
+Different apps require different levels of security. Before you start writing code analyze your security requirements
+
+- Don't reinvent the wheel. Use a standard catalog like [The OWASP Application Security Verification Standard](<#the-owasp-application-security-verification-standard-(asvs)>)
+
+## The OWASP Application Security Verification Standard (ASVS)
 
 > The standard provides a basis for designing, building, and testing technical application security controls, including architectural concerns, secure development lifecycle, threat modelling, agile security including continuous integration / deployment, serverless, and configuration concerns.
 
