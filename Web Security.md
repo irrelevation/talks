@@ -2,13 +2,13 @@
 
 ## TODO
 
-A short intro to all ## headings under 2.
-Single vs multi factor auth
-Add Tips from PragProg
-Fill Glossary
-Session: cookie vs tokens
-Tokens: tampering, enveloping, replay, null cypher, and key substitution attacks
-proof read
+- A short intro to all ## headings under 2.
+- Single vs multi factor auth
+- Add Tips from PragProg
+- Fill Glossary
+- Session: cookie vs tokens
+- Tokens: tampering, enveloping, replay, null cypher, and key substitution attacks
+- proof read
 
 ## Outline
 
