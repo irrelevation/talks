@@ -196,11 +196,32 @@ Adhering to a structured approach when developing software has several advantage
 
 This document describes the 10 most important security aspects every developer should be familiar with and incorporate in every project.
 
-### Define Security Requirements
+### 1. Define Security Requirements
 
 Different apps require different levels of security. Before you start writing code analyze your security requirements
 
-- Don't reinvent the wheel. Use a standard catalog like [The OWASP Application Security Verification Standard](#the-application-security-verification-standard)
+- Don't reinvent the wheel. Use a standard catalog like [The OWASP Application Security Verification Standard](#the-application-security-verification-standard) to choose measurable and testable requirements according to your needs.
+
+### 2. Leverage Security Frameworks and Libraries
+
+A lot of security features are readily available via libraries. Your job is to use these libraries correctly.
+
+- Use libraries from **trusted (open) sources**, that are **actively maintained** and **widely used**.
+- Check your libraries for known vulnerabilities (eg. with [retire.js](https://retirejs.github.io/retire.js/) for JavaScript)
+- Keep your dependencies up to date.
+
+### 3. Secure Database Access
+
+- Secure queries
+- Secure configuration
+- Secure authentication
+- Secure communication
+
+#### Secure Queries
+
+- [Use querie parameterization](https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html)
+
+#### Secure Configuration
 
 ## The Application Security Verification Standard
 
