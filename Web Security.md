@@ -23,6 +23,7 @@
 2. [History and technical background](#history-and-technical-background)
 3. [General security measures](#general-#security-measures)
 4. [How to address specific attack vectors](#how-to-address-specific-attack-vectors)
+5. [Further Reading](#further-reading)
 
 ## TLDR
 
@@ -30,18 +31,18 @@
 2. NEVER trust user input!
 3. Use libraries (correctly)
 
-## History and technical background
+# History and technical background
 
-### A brief History of the Internet
+## A brief History of the Internet
 
-#### Early 90s
+### Early 90s
 
 In the beginning the internet was a rather peacefull place. Servers were only sderving static assets, keeping the attack surface small. Maybe even more importantly, there were just not that many sites and servers to attack to begin with.
 
 - Tim Berners Lee developes HTTP and HTML at CERN as a method of text based data transfer. The early versions don't account for encryption or other security related features. First personal websites are created.
 - The internet gets a little more colorful with Mosaic and later Netscape Navigator allowing providing functionality for including images in websites.
 
-#### Mid 90s
+### Mid 90s
 
 The internet gets a little more dangerous with its rise in popularity and the advent of dynamic assets.
 
@@ -341,7 +342,7 @@ An attacker tricks your database driver into executing queries you did not write
 
 ### Cross-Site-Scripting
 
-## Further Reading
+# Further Reading
 
 - [First Steps in Web Security (MDN)](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security)
 - [Web Security for Developers, by Malcolm McDonald](https://nostarch.com/websecurity)
