@@ -2,8 +2,13 @@
 
 ## TODO
 
+A short intro to all ## headings under 2.
+Single vs multi factor auth
 Add Tips from PragProg
 Fill Glossary
+Session: cookie vs tokens
+Tokens: tampering, enveloping, replay, null cypher, and key substitution attacks
+proof read
 
 ## Outline
 
@@ -18,10 +23,12 @@ Fill Glossary
 
 ## Questions
 
-- How to hack a website/server?
 - What can I do as a developer?
 - How to facilitate writing secure code?
-- How is Information delivered over the Internet?
+- ad 2. Why those measures?
+- ad 3. How to hack a website/server?
+
+# 1. History and technical background
 
 ## A brief History of the Internet
 
@@ -36,7 +43,7 @@ Fill Glossary
 - templating: Rasmus Lerdorf creates PHP (Personal Home Page), dynamic generation of HTML
 - interactivity: Brendan Eich creates Mocha->LiveScript->JavaScript
 
-## How the Internet works (today)
+## How the Internet works today
 
 [The Internet protocol suite](https://en.wikipedia.org/wiki/Internet_protocol_suite): A bundle of protocols specifying "How the Internet Works"
 
@@ -127,6 +134,8 @@ JavaScript executing in the browser sandbox _is_ permitted to do the following a
 
 TODO
 
+# 2. General security measures
+
 ## The Software Developement Life Cycle (SDLC)
 
 Adhering to a structured approach when developing software has several advantages regarding security. It decreases the amount of bugs and vulnerabilities that will creep into your code. It lets you detect vulnerabilities earlier. It decreases the time it takes you to fix those vulnerabilities. This structured approach is called the Software Developement Life Cycle and is split into 5 Phases:
@@ -183,7 +192,10 @@ The standard splits the recommendations in three categories.
 1. L1 - The bare minimum
 2. L2 - Good enough for most apps
 3. L3 - High value, high assurance, or high safety apps
-   The following best practices cover only parts of the bare minimum.
+
+The following best practices cover only parts of the bare minimum.
+
+## Authentication
 
 ### Passwords
 
@@ -222,6 +234,78 @@ The standard splits the recommendations in three categories.
   - expire after a short period of time
 
 ### Credential Recovery
+
+- Don't send activation or recovery secrets in clear text
+- Don't use password hints or secret questions
+- Use secure recovery mechanisms like soft tokens or push notifications
+
+### Out of Band Verification
+
+This method uses a secure secondary communication channel for authentication, usually a physical device like your mobile phone. Ever had to type in that 6 digit code you received on your phone? That was out of band verification.
+
+- Don't offer clear text out of band verification (eg SMS) by default. Use push notifications instead
+- Tokens, codes, and authentication request should expire after 10 minutes
+- Tokens, codes, and authentication request should only be usable once.
+
+## Session Management
+
+- Sessions must be unique
+- It must not be possible to guess a session
+- It must not be possible to share a session
+- Sessions must be invalidated when no longer required and timed out if inactive.
+
+### General Session Management Security
+
+- Never reveal session tokens in URL parameters
+
+### Session Binding
+
+- Generate a new session token when a user authenticates
+- Session tokens should have at least 64 bits of entropy
+- Store session tokens _securely_ in the browser via secured cookies or session storage
+
+### Session Termination
+
+- Ensure that logout and expiration invalidate session tokens. The user should not be able to continue the session by hitting the "back" button.
+- If you permit users to stay logged in, let them re-authenticate after 30 days
+
+### Cookie based Session Management
+
+- set the "Secure" attribute on session tokens
+- set the "HttpOnly" attribute
+- set the "SameSite" attribute to limit CSRF attacks
+- Use the "\_\_Host-" prefix to ensure the cookie is sent only to the host who set it initially.
+- If you several apps under the same domain, make sure to set the "path" attribute as specifically as possible.
+
+### Token-based Session Management (JWT, OAuth)
+
+- Avoid static API secrets and keys, use session tokens like JWT instead
+- Allow users to revoke OAuth tokens
+- Stateless session tokens should use digital signatures and encryption to protect against tampering, enveloping, replay, null cypher, and key substitution attacks
+
+## Access Control
+
+## Validation, Sanitization and Encoding
+
+## Stored Cryptography
+
+## Error Handling and Logging
+
+## Data Protection
+
+## Communication
+
+## Malicious Code
+
+## Business Logic
+
+## Files and Resources
+
+## API and Web Service
+
+## Configuration
+
+# 3. How to address specific attack vectors
 
 ## OWASP Top 10
 
