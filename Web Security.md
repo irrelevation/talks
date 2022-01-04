@@ -100,7 +100,7 @@ The _Hypertext Transfer Protocol_ lets user agents (aka. browsers) communicate w
 
 ### TLS
 
-_Transport Layer Security_ (formerly SSL)
+_Transport Layer Security_ (formerly SSL) provides encrypted transmission of data.
 
 ### HTTPS
 
