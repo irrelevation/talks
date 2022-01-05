@@ -355,22 +355,48 @@ Making sure you are allowed to do what you are trying to do. This is achieved th
 
 ### 8. Protect Data Everywhere
 
-Categorize the data you are working with. While public data can be handled in an unsecure fashion, handle private data with care.
+Categorize the data you are working with. Identify the different kinds of data you are working with (eg. public data, user data, employee data) and asses the need for security on a per category level. While public data can be handled in an unsecure fashion, handle private data with care.
 
 - Avoid storing sensitive information if possible.
-- If you have to store sensitive data, make sure it is encrypted properly.
-- If you transmit sensitive data, make sure the transmission is encrypted.
+- Encrypt at rest. If you have to store sensitive data, make sure it is encrypted properly.
+- Encrypt in transit. If you transmit sensitive data, make sure the transmission is encrypted.
 - Don't implement your own encryption! Use trusted open resources instead.
 
 ### 9. Implement Security Logging and Monitoring
 
+Security Logging and Monitoring is a crucial step to enable you to detect attacks.
+
+- Log security related information for
+  - moinitoring intrusion detection
+  - forensic analysis
+  - compliance
+- Follow a common logging schema across systems
+- Ensure timestamps are consistent across services.
+- Don't log snesitive data if possible. Take care to strip personal information before you log.
+
+- Monitor your logs for
+  - submitted data that failed validation
+  - violations of access controls
+- Implement automatic threat responses, eg session invalidation, locking accounts...
+
+For a comprehensive list of things to monitor, take a look at [App Sensor](https://owasp.org/www-project-appsensor/)
+
+> ...guidance to implement application layer intrusion detection and automated response.
+
 ### 10. Handle all Errors and Exceptions
+
+Error and exception handling is important for your app to work reliably and securely.
+It is also a useful source for intrusion detection, because attacks may trigger errors.
+
+- Keep your error handling DRY.
+- Test your error handling.
+- Don't leak critical information in error messages that are displayed to a user.
 
 ## The Application Security Verification Standard
 
 > The standard provides a basis for designing, building, and testing technical application security controls, including architectural concerns, secure development lifecycle, threat modelling, agile security including continuous integration / deployment, serverless, and configuration concerns.
 
-[The standard](https://github.com/OWASP/ASVS) splits the recommendations in three categories.
+[The standard](https://github.com/OWASP/ASVS) is full of great guidelines. Definitely worth a read.
 
 # How to address specific attack vectors
 
