@@ -1,25 +1,5 @@
 # Web Security
 
-## TODO
-
-- why security by obscurity is a bad idea
-- trust in the context of security
-- trust boundaries, shift from server-side to trusted service layers
-- Add Tips from The Pragmatic Programmer Chapter 43
-- Fill Glossary
-- Tokens: tampering, enveloping, replay, null cypher, and key substitution attacks
-- ReDos attacks: Like a DDos attack but exploiting regular expressions with bad runtime complexities.
-- proof read
-
-## Questions
-
-- Why is security important?
-- What can I do as a developer?
-- How to facilitate writing secure code?
-- Why those measures?
-- How many and wich of those security measures do I need for my use case?
-- How to hack a website/server?
-
 ## Table of Contents
 
 1. [Table of Contents & TLDR](#web-security)
