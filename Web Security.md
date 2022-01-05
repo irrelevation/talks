@@ -426,3 +426,7 @@ An attacker tricks your database driver into executing queries you did not write
 
 - [Web Security for Developers, by Malcolm McDonald](https://nostarch.com/websecurity)
 - [Security for Web Developers, by John Paul Mueller](https://www.oreilly.com/library/view/security-for-web/9781491928684/)
+
+## Talks
+
+- [Security Training for Engineers](https://sudo.pagerduty.com/for_engineers/)
