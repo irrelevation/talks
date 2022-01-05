@@ -417,9 +417,10 @@ An attacker tricks your database driver into executing queries you did not write
 
 ## Online Resources
 
-- [The OWASP Top 10 Proactive Controls](https://owasp.org/www-project-proactive-controls/)
-- [The Application Security Verification Standard](https://github.com/OWASP/ASVS)
-- [The OWASP Top 10 Web Application Security Risks](https://owasp.org/Top10/)
+- [Top 10 Proactive Controls](https://owasp.org/www-project-proactive-controls/)
+- [Top 10 Web Application Security Risks](https://owasp.org/Top10/)
+- [Application Security Verification Standard](https://github.com/OWASP/ASVS)
+- [App Sensor - Guidelines for logging, monitoring and threat response](https://owasp.org/www-project-appsensor/)
 
 ## Books
 
