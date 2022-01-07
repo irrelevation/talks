@@ -105,3 +105,9 @@ Key identifier (kid) - added to the header, so you can easyly switch keys in the
 Key URLs - added to the header so the other party can look up necessary infos there. As the verifying side, you have to be a little more careful here, and make sure you are actually visiting the correct URL and not getting tricked into using fake key information.
 
 https://jwt.io/
+
+## Resources
+
+### Videos
+- [The Parts of JWT Security Nobody Talks About](https://www.youtube.com/watch?v=DPrhem174Ws)
+- [Common API Security Pitfalls](https://www.youtube.com/watch?v=Ss1tZjooo9I)
