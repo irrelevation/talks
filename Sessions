@@ -23,7 +23,32 @@ Cons:
   - You need to ensure integrity.
   - you have to write the token handling logic
   - Only present on XHR calls, unless you implement a service worker
-  
+
+### Reference Tokens
+The token is just an identifier. It does not contain sensitive information.
+The client sends it to a resource server with every request. The resource server sends it to the auth server to request the actual information.
+
+Pros:
+  - Easy to revoke. If a you loose the reference token (eg you loose your phone) you can revoke it and no information has been lost.
+
+Cons:
+  - Additional round trips. The resource server has to send a request to the auth server to validate the token on every incoming request.
+    In practice you probably want to cache the actual infos for a _short_ amount of time to reduce the load of your auth server.
+    Keep in mind that when the token gets invalidated, caching will cause it to still be valid for the lifetime of the cache so keep your TimeToLive(TTL) as short as possible.
+
+### Self Contained Tokens
+
+The token contains all information necessary to validate it. JWTs are an example.
+Allways check the validity of a token before using it!
+Don't confuse decoding for validation!
+
+Pros:
+  - No roundtrips to the auth server
+
+Cons:
+  - You have no control over the access token and they can't be easily revoked.
+    That's why these tokens should be short lived.
+
 ## Cookies
 Work well for small and medium apps. Don't choose token based authentication just because "that's the way you do things".
 Cookie does not mean stateful backend. I t lives on the client and is just a browser storage mechanism and a transport mechanism.
@@ -42,7 +67,6 @@ Cons:
 ## JSON Web Tokens
 
 base 64 encoded string. encryption is optional but recommended if your session data contains sensitive information.
-don't confuse decoding for verification!
 
 ### Symmetric Signatures
 
