@@ -1,0 +1,5 @@
+# OAuth
+OAuth 2.0 offers **authorization** and delegation thereof.
+
+# OpenIDConnect
+OpenIDConnect offers **authentication**.
