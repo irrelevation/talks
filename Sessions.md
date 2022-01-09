@@ -50,7 +50,7 @@ Pros:
 Cons:
   - You have no control over the access token and they can't be easily revoked.
     That's why these tokens should be short lived.
-
+    
 ## Cookies
 Work well for small and medium apps. Don't choose token based authentication just because "that's the way you do things".
 Cookie does not mean stateful backend. I t lives on the client and is just a browser storage mechanism and a transport mechanism.
@@ -107,6 +107,12 @@ Key identifier (kid) - added to the header, so you can easyly switch keys in the
 Key URLs - added to the header so the other party can look up necessary infos there. As the verifying side, you have to be a little more careful here, and make sure you are actually visiting the correct URL and not getting tricked into using fake key information.
 
 https://jwt.io/
+
+## Vulnerabilities
+TODO compare vulnerabilities for different session implementations.
+
+- Session Hijacking
+- Session Riding
 
 ## Resources
 
