@@ -122,6 +122,8 @@ TODO compare vulnerabilities for different session implementations.
 
 ## Resources
 
+- [JWT Cheat Sheet](https://pragmaticwebsecurity.com/files/cheatsheets/jwt.pdf)
+
 ### Videos
 - [The Parts of JWT Security Nobody Talks About](https://www.youtube.com/watch?v=DPrhem174Ws)
 - [Common API Security Pitfalls](https://www.youtube.com/watch?v=Ss1tZjooo9I)
