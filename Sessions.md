@@ -64,9 +64,11 @@ Cons:
     - Use existing middleware solutions if possible. CORS is error prone if you on't know what you're doing.
     - Otherwise use strict whitelisting on origin headers (don't pattern match, use equality comparisions only) and implements tests for common mistakes
   
-## JSON Web Tokens
+## JSON Web Tokens (JWT)
 
 base 64 encoded string. encryption is optional but recommended if your session data contains sensitive information.
+
+- Make sure your app rejects unsigned JWTs (`alg:none`).
 
 ### Symmetric Signatures
 
