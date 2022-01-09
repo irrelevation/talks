@@ -96,6 +96,8 @@ How "login with google" works:
 Open ID connect - asymmetricly encrypted JWT
 
 ### How to store your keys
+Keys should be properly encrypted. Don't put your keys in version control or configs or the like.
+Ideally use an open source solution provided by experts like [Vault](https://www.vaultproject.io/).
 
 ### Keyrotation
 You have to rotate (i.e. change) keys regularly.
@@ -106,7 +108,7 @@ Solutions:
 - Key identifier added to the `kid` header, so you can easyly switch keys in the future and let people know about it
 - Key URLs added to the `jku` header, so the other party can look up necessary infos there. As the verifying side, you have to be a little more careful here, and make sure you are actually visiting the correct URL and not getting tricked into using fake key information.
 
-https://jwt.io/
+Again, this stuff has a lot of nuances and can be hard to get right. If you are not sure what you're doing use a library or framework like [Vault](https://www.vaultproject.io/).
 
 ## Vulnerabilities
 TODO compare vulnerabilities for different session implementations.
@@ -122,6 +124,7 @@ TODO compare vulnerabilities for different session implementations.
 
 ## Resources
 
+- [JSON Web Tokens](https://jwt.io/)
 - [JWT Cheat Sheet](https://pragmaticwebsecurity.com/files/cheatsheets/jwt.pdf)
 
 ### Videos
