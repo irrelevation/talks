@@ -24,6 +24,8 @@ Cons:
   - you have to write the token handling logic
   - Only present on XHR calls, unless you implement a service worker
 
+Don't store tokens in LocalStorage, it is unsafe. LocalStorage can be accessed by JavaScript. If an attacker manages to execute code in the browser eg. via XSS or a compromised dependency the tokens can be stolen.
+
 ### Reference Tokens
 The token is just an identifier. It does not contain sensitive information.
 The client sends it to a resource server with every request. The resource server sends it to the auth server to request the actual information.
