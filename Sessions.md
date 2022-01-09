@@ -100,9 +100,9 @@ Open ID connect - asymmetricly encrypted JWT
 ### keyrotation
 You have to rotate (i.e. change) keys regularly.
 
-problem:
-you want to be able to change keys from time to time, but you need a way to inform people about what public key to use.
-solutions:
+Problem:
+You want to be able to change keys from time to time, but you need a way to inform people about what public key to use.
+Solutions:
 Key identifier (kid header) - added to the header, so you can easyly switch keys in the future and let people know about it
 Key URLs - added to the header so the other party can look up necessary infos there. As the verifying side, you have to be a little more careful here, and make sure you are actually visiting the correct URL and not getting tricked into using fake key information.
 
