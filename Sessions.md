@@ -68,7 +68,7 @@ Cons:
 
 base 64 encoded string. encryption is optional but recommended if your session data contains sensitive information.
 
-- Make sure your app rejects unsigned JWTs (`alg:none`).
+- Make sure your app rejects unsigned JWTs (i.e. JWTs with the `alg:none` header).
 
 ### Symmetric Signatures
 
