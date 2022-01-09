@@ -112,6 +112,12 @@ TODO compare vulnerabilities for different session implementations.
 - Session Hijacking
 - Session Riding
 
+## Security measures
+- Focus on preventing XSS when dealing with frontends
+- In sensitive contexts add measures that address successfull XSS scenarios.
+  - Defend against session highjacking by keeping tokens out of the browser. Add a backend-for-frontend (BFF) to your app, a thin proxy that handles tokens.
+  - Defend against session riding by monitoring and restricting traffic in the BFF.
+
 ## Resources
 
 ### Videos
