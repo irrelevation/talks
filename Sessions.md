@@ -76,6 +76,7 @@ JWTs consist of
 
 - Encrypt your tokens if you put sensitive information in header or payload.
 - Make sure your app rejects unsigned JWTs (i.e. JWTs with the `alg:none` header).
+- Keep the lifetime of your tokens short.
 
 ### Claims
 The payload can contain three different kind of claims.
