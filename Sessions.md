@@ -13,6 +13,11 @@
 
 ## Tokens
 
+After a user logs in she gets a token that she sends with every subsequent request, usually by setting an http header
+```http
+Authorization: Bearer <token>
+```
+
 Pros:
   - scalable
   - works well for cross origin APIs
