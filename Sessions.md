@@ -66,7 +66,14 @@ Cons:
   
 ## JSON Web Tokens (JWT)
 
-base 64 encoded string. encryption is optional but recommended if your session data contains sensitive information.
+JWTs consist of
+
+- A **header**, containing meta data, like a type of toke and algorithm used, encoded in Base64URL.
+- A **payload**, containing claims about an entity, encoded in Base64URL.
+- A **signature** created from the header, the payload, a secret and the algorithm specified in the header.
+
+
+Encryption is optional but recommended if your session data contains sensitive information.
 
 - Make sure your app rejects unsigned JWTs (i.e. JWTs with the `alg:none` header).
 
