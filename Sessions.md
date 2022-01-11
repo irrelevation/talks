@@ -68,16 +68,26 @@ Cons:
 
 JWTs consist of
 
-- A **header**, containing meta data, like a type of toke and algorithm used, encoded in Base64URL.
-- A **payload**, containing claims about an entity, encoded in Base64URL.
-- A **signature** created from the header, the payload, a secret and the algorithm specified in the header.
+- a **header**, containing meta data, like a type of toke and algorithm used, encoded in Base64URL.
+- a **payload**, containing claims about an entity, encoded in Base64URL.
+- a **signature** created from the header, the payload, a secret and the algorithm specified in the header.
 
+### Best practices
 
-Encryption is optional but recommended if your session data contains sensitive information.
-
+- Encrypt your tokens if you put sensitive information in header or payload.
 - Make sure your app rejects unsigned JWTs (i.e. JWTs with the `alg:none` header).
 
-### Symmetric Signatures
+### Claims
+The payload can contain three different kind of claims.
+
+1.  **Registered claims** [predefined] in the spec(https://datatracker.ietf.org/doc/html/rfc7519#section-4.1) like `iss` (issuer), `exp` (expiration time), `sub` (subject)...
+2.  **Public claims** that are commonly used and [registered](https://www.iana.org/assignments/jwt/jwt.xhtml)
+3.  **Private claims** defined by the parties using the JWT
+
+### Signatures
+Signatures are used to validate, that the header and the payload have not been tampered with.
+
+#### Symmetric Signatures
 
 encryption:
 HMAC = data (i.e. token) + secret key
@@ -91,7 +101,8 @@ Pros:
 Cons:
   - Only applicable in a single trust zone. If you sign something, but someone else needs to verify it, you're out of luck, because you can't share your key.
 
-### Asymmetric Signatures
+#### Asymmetric Signatures
+Are used if issuing and validation of the token are performed by different entities. They can also be used to validate the identity of the sender.
 RSA
 encryption:
 data + private key = signature
