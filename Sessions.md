@@ -56,7 +56,7 @@ Cons:
     
 ## Cookies
 Work well for small and medium apps. Don't choose token based authentication just because "that's the way you do things".
-Cookie does not mean stateful backend. I t lives on the client and is just a browser storage mechanism and a transport mechanism.
+Cookie does not mean stateful backend. It lives on the client and is just a browser storage mechanism and a transport mechanism.
 
 Pros:
   - servers are generally considered safe trusted environments and a good place to store session information. In order to change session infos saved on a server an attacker would have to have access to the server anyways and at that point session security is not our biggest worry anymore.
