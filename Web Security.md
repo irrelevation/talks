@@ -111,8 +111,8 @@ JavaScript executing in the browser sandbox _is_ permitted to do the following a
 ### via session
 
 1. The user visits `www.yourwebsite.com` in their browser
-2. The browser tries to resolve the domain to an IP address. It looks in the Systems DNS cache. If it wasn't successfull it tries the ISP's DNS cache. If it looks it up on the DNS Server
-3. The browser tries to initiate a TCP connection to this IP address (via a TCP handshake)
+2. The browser tries to resolve the domain to an IP address. It looks in the Systems DNS cache. If it wasn't successfull it tries the ISP's DNS cache. If unsuccessful it looks it up on the DNS Server.
+3. The browser tries to initiate a TCP connection to this IP address (via a TCP handshake).
 4. The Browser sends an HTTP GET request. TCP splits it into packets and sends it to the IP address.
 5. The session upgrades to HTTPS: One of the hosts initiaties a TLS session via TLS handshake, they decide on a cypher and exchange keys.
 6. The server sends back the encrypted HTTP response. The browser decrypts the response, parses it and displays the page. It sends requests for additional resources linked in the HTML file.
