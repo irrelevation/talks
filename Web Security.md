@@ -253,7 +253,7 @@ Applications that don't contain private data.
 - Never force users to change their password or disallow past passwords
 - must be checked against known breached passwords
 - Provide a password strength meter
-- Make sure users can pase in passwords and use password managers
+- Make sure users can paste in passwords and use password managers
 - Make the password hidden/masked by default, but provide options to show the last character and the entire password
 
 ###### Password Recovery
