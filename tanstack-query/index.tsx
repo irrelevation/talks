@@ -9,9 +9,15 @@ const useFetch = (url: string) => {
   let [error, setError] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const runFetch = async () => {
       try {
-        let res = await fetch(url);
+        let res = await fetch(url, {
+          signal: controller.signal,
+        });
+        if (controller.signal.aborted) {
+          return;
+        }
         if (res.status >= 500) {
           setError(new Error(res.statusText));
         }
@@ -22,11 +28,14 @@ const useFetch = (url: string) => {
           setData(json);
         }
       } catch (error) {
-        setError(error);
+        if (error.name !== "AbortError") {
+          setError(error);
+        }
       }
     };
     runFetch();
-  }, []);
+    return () => controller.abort();
+  }, [url]);
 
   return useMemo({ data, error });
 };
