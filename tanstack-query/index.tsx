@@ -8,7 +8,12 @@ declare function ErrorView();
 
 const NodeDetail = () => {
   let { nodeType, nodeId } = useParams();
-  let { data: node, error } = useQuery({
+  let {
+    data: node,
+    error,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: [{ nodeType, nodeId }],
     queryFn: async ({ signal }) => {
       let res = await fetch(`/data/${nodeType}/${nodeId}`, {
@@ -18,11 +23,11 @@ const NodeDetail = () => {
     },
   });
 
-  if (error) {
+  if (isError) {
     return <ErrorView error={error} />;
   }
 
-  if (!node) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
