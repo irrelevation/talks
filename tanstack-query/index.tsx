@@ -6,10 +6,13 @@ declare function useParams();
 const useFetch = (url: string) => {
   let [data, setData] = useState(null);
 
-  useEffect(async () => {
-    let res = await fetch(url);
-    let json = await res.json();
-    setData(json);
+  useEffect(() => {
+    const runFetch = async () => {
+      let res = await fetch(url);
+      let json = await res.json();
+      setData(json);
+    };
+    runFetch();
   }, []);
 
   return data;
