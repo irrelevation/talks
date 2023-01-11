@@ -17,18 +17,20 @@ const labels: Label<EmployeeCreateInput> = {
   firstName: "First Name",
   lastName: "Last Name",
   team: "Team",
+  age: "Alter",
 };
 
 const initialData: EmployeeCreateInput = {
   firstName: "",
   lastName: "",
   team: "Lit",
+  age: 0,
 };
 
 const Home: NextPage = () => {
   const [input, setInput] = useState(initialData);
 
-  const { data: employees } = trpc.employee.getAll.useQuery();
+  const { data: employees } = trpc.employee.getEveryone.useQuery();
 
   const utils = trpc.useContext();
   const { mutate } = trpc.employee.create.useMutation({
@@ -40,6 +42,7 @@ const Home: NextPage = () => {
 
   return (
     <Wrapper>
+      {/* Inputs */}
       <div className="flex gap-8">
         <Input
           key="firstName"
@@ -57,6 +60,15 @@ const Home: NextPage = () => {
             setInput((input) => ({ ...input, lastName: event.target.value }))
           }
         />
+        <Input
+          key="age"
+          label={labels["age"]}
+          value={input["age"]}
+          type="number"
+          onChange={(event) =>
+            setInput((input) => ({ ...input, age: Number(event.target.value) }))
+          }
+        />
         <Select
           key="team"
           label={labels["team"]}
@@ -70,9 +82,9 @@ const Home: NextPage = () => {
           }
         />
       </div>
-
       <Button onClick={() => mutate(input)} label={"Add Employee"} />
 
+      {/* Tabelle */}
       <Table
         labels={labels}
         rows={employees}
