@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     // Init Vercel AI StreamData
     const vercelStreamData = new StreamData();
 
-    // Setup callbacks
+    // Setup callbacks - adds event data to the stream ("retrieve", "llm-tool-call", "llm-tool-result")
     const callbackManager = createCallbackManager(vercelStreamData);
 
     // Calling LlamaIndex's ChatEngine to get a streamed response
